@@ -10,11 +10,11 @@ export default function App() {
     return () => clearTimeout(timer);
   }, []);
 
-  // Splash screen
+
   if (showSplash) {
     return (
       <View style={styles.splash}>
-        <StatusBar hidden /> {/* hides status bar */}
+        <StatusBar hidden />
         <Image
           source={require("../assets/G.O_logo-removebg-preview.png")}
           style={styles.logo}
@@ -24,7 +24,7 @@ export default function App() {
     );
   }
 
-  // Home screen after splash
+ 
   return <HomeScreen />;
 }
 

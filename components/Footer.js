@@ -7,6 +7,8 @@ import {
   Alert,
   Platform,
   Image,
+  SafeAreaView,
+  StatusBar,
 } from "react-native";
 import { useRouter, usePathname } from "expo-router";
 import { Home, Search, PlusCircle, Bell, User } from "lucide-react-native";
@@ -18,7 +20,6 @@ const Footer = () => {
   return (
     <View style={styles.bottomNav}>
       <View style={styles.navItems}>
-        {/* Home */}
         <Pressable
           style={styles.navItem}
           onPress={() => router.push("/Home")}
@@ -26,7 +27,7 @@ const Footer = () => {
         >
           <Home
             size={24}
-            color={pathname === "/Home" ? "#c1ccc6" : "#000"}
+            color={pathname === "/Home" ? "#c1ccc6" : "#fff"}
             strokeWidth={3}
           />
           <Text
@@ -38,15 +39,14 @@ const Footer = () => {
           </Text>
         </Pressable>
 
-        {/* Search */}
         <Pressable
           style={styles.navItem}
-          onPress={() => router.push("/search/")}
+          onPress={() => router.push("/test")}
           hitSlop={10}
         >
           <Search
             size={24}
-            color={pathname === "/search/" ? "#c1ccc6" : "#000"}
+            color={pathname === "/test" ? "#c1ccc6" : "#fff"}
             strokeWidth={3}
           />
           <Text
@@ -58,7 +58,6 @@ const Footer = () => {
           </Text>
         </Pressable>
 
-        {/* Center Post */}
         <Pressable
           style={styles.centerNavItem}
           onPress={() => {
@@ -77,7 +76,6 @@ const Footer = () => {
                 pathname === "/Post" && styles.centerButtonActive,
               ]}
             >
-              {/* Replace with your image */}
               <Image
                 source={require("../assets/G.O_logo-removebg-preview.png")}
                 style={styles.centerLogo}
@@ -86,7 +84,6 @@ const Footer = () => {
           </View>
         </Pressable>
 
-        {/* Notification */}
         <Pressable
           style={styles.navItem}
           onPress={() => router.push("/Notification")}
@@ -94,7 +91,7 @@ const Footer = () => {
         >
           <Bell
             size={24}
-            color={pathname === "/Notification" ? "#c1ccc6" : "#000"}
+            color={pathname === "/Notification" ? "#c1ccc6" : "#fff"}
             strokeWidth={3}
           />
           <Text
@@ -108,7 +105,6 @@ const Footer = () => {
           </Text>
         </Pressable>
 
-        {/* Profile */}
         <Pressable
           style={styles.navItem}
           onPress={() => router.push("/Profile")}
@@ -117,7 +113,7 @@ const Footer = () => {
           <View style={styles.footerIcon}>
             <User
               size={24}
-              color={pathname === "/Profile" ? "#c1ccc6" : "#000"}
+              color={pathname === "/Profile" ? "#c1ccc6" : "#fff"}
               strokeWidth={3}
             />
           </View>
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#000",
     paddingTop: 20,
     paddingBottom: Platform.OS === "ios" ? 15 : 20,
     borderTopLeftRadius: 24,
@@ -203,7 +199,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
   inactiveText: {
-    color: "#000",
+    color: "#fff",
     fontWeight: "bold",
     fontSize: 12,
   },
