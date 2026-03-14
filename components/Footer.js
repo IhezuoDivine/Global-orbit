@@ -107,7 +107,7 @@ const Footer = () => {
 
         <Pressable
           style={styles.navItem}
-          onPress={() => router.push("/Profile")}
+          onPress={() => router.push("/Profile/profile")}
           hitSlop={10}
         >
           <View style={styles.footerIcon}>

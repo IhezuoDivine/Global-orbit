@@ -11,11 +11,20 @@ import {
 import React from "react";
 import Footer from "../components/Footer";
 import { FontAwesome } from "@expo/vector-icons";
+import {
+  createDrawerNavigator,
+  DrawerContentScrollView,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+import Profile from "./Profile/profile";
+import { useRouter } from "expo-router";
 
-const Home = () => {
-  const sellerImage = "https://i.pravatar.cc/150?img=3";
-  const productImage = "https://picsum.photos/400/300";
-  const businessName = "TechHub Store";
+const sellerImage = "https://i.pravatar.cc/150?img=3";
+const productImage = "https://picsum.photos/400/300";
+const businessName = "TechHub Store";
+const Drawer = createDrawerNavigator();
+
+function Home() {
   return (
     <View style={{ flex: 1, backgroundColor: "black" }}>
       <StatusBar style="light" backgroundColor="black" />
@@ -119,9 +128,60 @@ const Home = () => {
       </SafeAreaView>
     </View>
   );
-};
+}
 
-export default Home;
+function CustomDrawer(props) {
+  const router = useRouter();
+
+  return (
+    <DrawerContentScrollView {...props} style={styles.drawcontainer}>
+      {/* User header */}
+      <Pressable
+        style={styles.userHeader}
+        onPress={() => router.push("/Profile/profile")}
+      >
+        <Image
+          source={{ uri: "https://i.pravatar.cc/150?img=3" }}
+          style={styles.avatar}
+        />
+        <Text style={styles.drawname}>Name </Text>
+        <Text style={styles.drawusername}>UserName </Text>
+      </Pressable>
+
+      {/* Drawer items */}
+      <DrawerItemList
+        {...props}
+        activeTintColor="#00ff88"
+        inactiveTintColor="white"
+        labelStyle={{ fontSize: 16, fontWeight: "600" }}
+      />
+
+      {/* Optional extra item */}
+      <Pressable style={styles.logoutButton} onPress={() => alert("Logout")}>
+        <Text style={{ color: "white" }}>Logout</Text>
+      </Pressable>
+    </DrawerContentScrollView>
+  );
+}
+
+export default function profiledisplay() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        swipeEnabled: true,
+      }}
+      drawerContent={(props) => <CustomDrawer {...props} />}
+    >
+      <Drawer.Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Drawer.Navigator>
+  );
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -224,5 +284,41 @@ const styles = StyleSheet.create({
   },
   trust: {
     color: "#fff",
+  },
+  drawcontainer: {
+    backgroundColor: "#000",
+    top: -30,
+  },
+  userHeader: {
+    margin: 10,
+    alignItems: "center",
+    paddingBottom: 30,
+    borderBottomWidth: 1,
+    borderColor: "#313030",
+    position: "fixed",
+    zIndex: 100,
+  },
+  avatar: {
+    width: 60,
+    height: 60,
+    borderRadius: 50,
+    marginBottom: 10,
+  },
+  drawname: {
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
+  },
+  drawusername: {
+    color: "white",
+    fontSize: 16,
+  },
+  logoutButton: {
+    marginTop: 20,
+    marginHorizontal: 20,
+    padding: 10,
+    backgroundColor: "#111",
+    borderRadius: 8,
+    alignItems: "center",
   },
 });
