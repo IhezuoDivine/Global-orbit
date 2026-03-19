@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { View, Image, StyleSheet, StatusBar } from "react-native";
-import HomeScreen from "./Home";
+import { ThemeProvider } from "../contexts/ThemeContext"; // wrap your app in theme
+import ProfileDisplay from "../contexts/ProfileDisplay"; // your Drawer navigator
 
 export default function App() {
   const [showSplash, setShowSplash] = useState(true);
@@ -9,7 +10,6 @@ export default function App() {
     const timer = setTimeout(() => setShowSplash(false), 3000); // 3 seconds
     return () => clearTimeout(timer);
   }, []);
-
 
   if (showSplash) {
     return (
@@ -24,8 +24,11 @@ export default function App() {
     );
   }
 
- 
-  return <HomeScreen />;
+  return (
+    <ThemeProvider>
+      <ProfileDisplay />
+    </ThemeProvider>
+  );
 }
 
 const styles = StyleSheet.create({
