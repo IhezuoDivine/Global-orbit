@@ -31,9 +31,6 @@ export default function Home() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <Text style={{ color: theme.text }}>Current Mode: {mode}</Text>
-          <ThemeToggle />
-
           <View style={styles.headercontainer}>
             <Text style={styles.head}>Green</Text>
             <Pressable style={styles.messageButton}>
@@ -67,26 +64,40 @@ export default function Home() {
               </View>
             ))}
           </ScrollView>
-
-          {[1, 2].map((i) => (
-            <View key={i} style={styles.post}>
-              <View style={styles.postheader}>
-                <View style={styles.postheaderbox}>
-                  <Image
-                    source={{ uri: sellerImage }}
-                    style={styles.postavatar}
-                  />
-                  <Text style={styles.businessName}>{businessName}</Text>
+          <View style={styles.line}></View>
+          {[1, 2].map((i, index, arr) => (
+            <View key={i}>
+              <View style={styles.post}>
+                <View style={styles.postheader}>
+                  <View style={styles.postheaderbox}>
+                    <Image
+                      source={{ uri: sellerImage }}
+                      style={styles.postavatar}
+                    />
+                    <Text style={styles.businessName}>{businessName}</Text>
+                  </View>
+                  <Text style={styles.trust}>⭐ Trust</Text>
                 </View>
-                <Text style={styles.trust}>⭐ Trust</Text>
-              </View>
 
-              <Image source={{ uri: productImage }} style={styles.postImage} />
+                <Image
+                  source={{ uri: productImage }}
+                  style={styles.postImage}
+                />
 
-              <View style={styles.actions}>
-                <Text>❤️ Like</Text>
-                <Text>💬 Comment</Text>
+                <View style={styles.actions}>
+                  <Text style={styles.writeuptext}>❤️ Like</Text>
+                  <Text style={styles.writeuptext}>💬 Comment</Text>
+                </View>
+                <View style={styles.writeup}>
+                  <Text style={styles.writeuptext}>
+                    his is not a React Native problem — it’s TypeScript
+                    protecting you. In plain JavaScript, this would silently
+                    fail or cause UI bugs. TypeScript is forcing you to keep
+                    your UI consistent.
+                  </Text>
+                </View>
               </View>
+              {index < arr.length - 1 && <View style={styles.line} />}
             </View>
           ))}
         </ScrollView>
@@ -99,9 +110,15 @@ export default function Home() {
 
 const getStyles = (theme: any) =>
   StyleSheet.create({
-    container: { flex: 1 },
-    scrollContent: { paddingBottom: 120 },
-    screen: { paddingTop: 10 },
+    container: {
+      flex: 1,
+    },
+    scrollContent: {
+      paddingBottom: 120,
+    },
+    screen: {
+      paddingTop: 10,
+    },
     headercontainer: {
       flexDirection: "row",
       justifyContent: "space-between",
@@ -112,12 +129,18 @@ const getStyles = (theme: any) =>
     head: {
       fontSize: 50,
       fontWeight: "bold",
-      color: "#fff",
+      color: theme.text,
       textAlign: "center",
       marginLeft: "30%",
     },
-    messageButton: { paddingRight: 20 },
-    trustedbox: { flexDirection: "row", paddingVertical: 2, borderRadius: 10 },
+    messageButton: {
+      paddingRight: 20,
+    },
+    trustedbox: {
+      flexDirection: "row",
+      paddingVertical: 2,
+      borderRadius: 10,
+    },
     person: {
       flexDirection: "column",
       justifyContent: "center",
@@ -131,41 +154,65 @@ const getStyles = (theme: any) =>
       height: 60,
       borderRadius: 50,
       borderWidth: 2,
-      borderColor: "#fff",
+      borderColor: theme.text,
       marginBottom: 10,
     },
     name: {
       marginTop: 5,
       fontSize: 14,
-      color: "#fff",
+      color: theme.text,
       textAlign: "center",
       maxWidth: 70,
     },
     post: {
-      backgroundColor: "#fff",
+      backgroundColor: theme.background,
+      color: theme.text,
       marginVertical: 15,
-      height: 500,
-      borderRadius: 10,
-      borderColor: "#292828",
-      borderTopWidth: 2,
-      marginTop: 20,
+      height: "auto",
     },
     postheader: {
       flexDirection: "row",
       alignItems: "center",
       justifyContent: "space-between",
       padding: 10,
-      backgroundColor: "#000",
+      backgroundColor: theme.backgound,
       gap: 10,
     },
-    postheaderbox: { flexDirection: "row", alignItems: "center", gap: 10 },
-    businessName: { color: "#fff" },
-    postavatar: { width: 40, height: 40, borderRadius: 20 },
-    postImage: { width: "100%", height: 400 },
+    postheaderbox: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: 10,
+    },
+    businessName: {
+      color: theme.text,
+    },
+    postavatar: {
+      width: 40,
+      height: 40,
+      borderRadius: 20,
+    },
+    postImage: {
+      width: "100%",
+      height: 400,
+    },
     actions: {
       flexDirection: "row",
       justifyContent: "space-around",
       padding: 12,
     },
-    trust: { color: "#fff" },
+    trust: {
+      color: theme.text,
+    },
+    line: {
+      height: 1,
+      backgroundColor: theme.line,
+      marginTop: 20,
+    },
+    writeup: {
+      padding: 10,
+      fontWeight: "bold",
+    },
+    writeuptext: {
+      color: theme.text,
+    },
   });

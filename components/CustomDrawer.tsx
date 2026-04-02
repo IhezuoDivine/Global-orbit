@@ -23,8 +23,6 @@ export default function CustomDrawer(props: any) {
 
   return (
     <DrawerContentScrollView {...props} style={styles.drawcontainer}>
-      <ThemeToggle />
-
       <Pressable
         style={styles.userHeader}
         onPress={() => navigation.navigate("Profile")}
@@ -38,25 +36,27 @@ export default function CustomDrawer(props: any) {
         {...props}
         labelStyle={{ fontSize: 16, fontWeight: "600" }}
       />
+      <ThemeToggle />
 
       <Pressable style={styles.logoutButton} onPress={() => alert("Logout")}>
         <Text style={{ color: "white" }}>Logout</Text>
       </Pressable>
+      
     </DrawerContentScrollView>
   );
 }
 
 const getStyles = (theme: any) =>
   StyleSheet.create({
-    drawcontainer: { backgroundColor: "#000", top: -30 },
+    drawcontainer: {
+      backgroundColor: theme.background,
+    },
     userHeader: {
       margin: 10,
       alignItems: "center",
       paddingBottom: 30,
       borderBottomWidth: 1,
       borderColor: "#313030",
-      position: "absolute",
-      zIndex: 100,
     },
     avatar: {
       width: 60,
@@ -65,12 +65,12 @@ const getStyles = (theme: any) =>
       marginBottom: 10,
     },
     drawname: {
-      color: "white",
+      color: theme.text,
       fontSize: 20,
       fontWeight: "bold",
     },
     drawusername: {
-      color: "white",
+      color: theme.text,
       fontSize: 16,
     },
     logoutButton: {
